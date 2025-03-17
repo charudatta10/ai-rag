@@ -17,12 +17,12 @@ def generate_embeddings(texts):
     embeddings = []
     for text in texts:
         response = ollama.embed(
-    model="mxbai-embed-large",
-    input=text,
-)
-        embedding = response["embeddings"]
+            model="mxbai-embed-large",
+            input=text,
+        )
+        embedding = response["embeddings"]  # Correct key is "embedding"
         embeddings.append(embedding)
-    return np.vstack(embeddings)
+    return np.vstack(embeddings)  # Stack into a 2D array
 
 # Create FAISS index
 def create_faiss_index(embeddings):
@@ -33,16 +33,17 @@ def create_faiss_index(embeddings):
 
 # Retrieve relevant chunks using FAISS
 def retrieve_relevant_chunks(query, index, documents, num_results=2):
-    query_embedding = ollama_client.embed(model="mxbai-embed-large", input=query)
-    distances, indices = index.search(np.array([query_embedding]), num_results)
+    response = ollama.embed(model="mxbai-embed-large", input=query)
+    query_embedding = np.array(response["embeddings"]).reshape(1, -1)  # Reshape to 2D
+    distances, indices = index.search(query_embedding, num_results)
     return [documents[i] for i in indices[0]]
 
 # Generate a context-aware response using Ollama
 def generate_response(query, relevant_chunks):
     context = " ".join(relevant_chunks)
     prompt = f"Context: {context}\n\nQuestion: {query}\n\nAnswer:"
-    response = ollama_client.generate(prompt)  # Use your Ollama model for generation
-    return response
+    response = ollama.generate(model="llama3.2:3b", prompt=prompt)  # Specify the model
+    return response["response"]  # Extract the generated text
 
 # Main workflow
 if __name__ == "__main__":
