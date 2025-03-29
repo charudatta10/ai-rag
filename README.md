@@ -50,16 +50,11 @@ invoke
 Contributions are welcome! Please open an issue or submit a pull request for any bugs or feature requests.  
 [Report a bug or Request a feature](https://github.com/charudatta10/ai-rag/issues)
 
-## License
+## COPYRIGHT NOTICE
 
-This project is licensed under the GPL-3.0 License. See the [LICENSE](https://github.com/charudatta10/ai-rag/blob/main/LICENSE) file for details.
-
----
-
-> [!NOTE]
->
-> COPYRIGHT NOTICE  
-> Some Rights Reserved © 2025 Charudatta Korde.  
-> This work and its derivatives may only be used with full attribution.
+**Some Rights Reserved © 2025 Charudatta Korde.**  
+This work and its derivatives may only be used with full attribution to the original author.
+Any unauthorized commercial use is strictly prohibited.
+For complete details, refer to the accompanying License Agreement.
 
 <!-- Acknowledgment, References, Misc -->
